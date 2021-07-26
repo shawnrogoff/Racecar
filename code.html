@@ -2,7 +2,7 @@
 <html lang="en" class="h-100">
 
 <head>
-    <title>App Name: A Coding Project By Shawn Rogoff</title>
+    <title>Racecar: A Coding Project By Shawn Rogoff</title>
     <link rel="shortcut icon" type="image/jpg" href="/img/ShawnRogoffFavicon.ico"/>
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -30,7 +30,7 @@
     <!-- Nav Section -->
     <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
         <div class="container-fluid">
-            <a class="navbar-brand logoFont"><img src="/img/ShawnRogoffMarkLight.png" class="d-inline-block align-text-top" width="30" height="24"> App Name</a>
+            <a class="navbar-brand logoFont"><img src="/img/ShawnRogoffMarkLight.png" class="d-inline-block align-text-top" width="30" height="24"> Racecar</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
                 aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -47,7 +47,7 @@
                         <a class="nav-link active" aria-current="page" href="code.html">The Code</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" target="_blank" href="#">Git Repo</a>
+                        <a class="nav-link" target="_blank" href="https://github.com/shawnrogoff/Racecar">Git Repo</a>
                         <!-- put github link in the above href -->
                     </li>
                     <li class="nav-item">
@@ -62,24 +62,154 @@
     <!-- Main Section -->
     <main class="flex-shrink-0">
         <div class="container px-5 py-5 mt-5">
-            <h2 class="border-1 border-bottom border-dark">The Code for APP NAME.</h2>
+            <h2 class="border-1 border-bottom border-dark">The Code for Racecar.</h2>
             <div class="row row-cols-1 row-cols-lg-2">
                 <!-- Code Side -->
                 <div class="col-lg-8">
                     <pre class="line-numbers"><code class="language-javascript">
                         <!-- Put valid javascript here -->
-                        // Call Hello World
-                        function HelloWorld(){
-                            alert("Hello World!");
+                        // Get the string value from page
+                        // Controller Function
+                        function getValue(){
+                            // ensures the alert is invisible when the page starts
+                            document.getElementById("alert").classList.add("invisible");
+
+                            // set variable equal to the user input
+                            let userInput = document.getElementById("userInput").value;
+
+                            // if user just hits the button, then use the placeholder value
+                            if (userInput == ""){
+                                userInput = "racecar";
+                            }
+
+                            // pass input into reverseString function
+                            let reversedInput = reverseInput(userInput);
+
+                            // pass reversedInput into our palindrome checker
+                            let palindromeTestResult = palindromeCheck(userInput, reversedInput);
+
+                            // pass reversed string to displayResults function
+                            displayResults(userInput, reversedInput, palindromeTestResult);
+                        }
+
+                        // Reverse the string
+                        // Logic Function
+                        function reverseInput(userInput){
+                            let reversedInput = [];
+
+                            // use a for loop to reverse the string
+                            for (let index = userInput.length - 1; index >= 0; index--) {
+                                reversedInput += userInput[index];
+                            }
+
+                            // return the reversedString array to getValue function
+                            return reversedInput;
+                        }
+
+                        // Check original versus the reversed version
+                        // Logic Function
+                        function palindromeCheck(userInput, reversedInput){
+                            let palindromeTestResult = "False";
+
+                            if (userInput == reversedInput){
+                                palindromeTestResult = "True";
+                            }
+
+                            return palindromeTestResult;
+                        }
+
+                        // Display the reversed string to page
+                        // View Function
+                        function displayResults(userInput, reversedInput, palindromeTestResult){
+
+                            // show palindrome result based on the test results
+                            if (palindromeTestResult == "True"){
+                                document.getElementById("alertHeading").innerHTML = "Success! This is a palindrome!";
+                            } else {
+                                document.getElementById("alertHeading").innerHTML = "I'm sorry! This is not a palindrome.";
+                            }
+
+                            // write the message to the page
+                            // This doesn't render well with Prism. See source code.
+                            document.getElementById("message").innerHTML = `The original input is: ${userInput}</p><p>The reversed input is: ${reversedInput}`;
+
+                            // show the alert box
+
+                            document.getElementById("alert").classList.remove("invisible");
+                        }
+
+                        // allow button to reset the app
+
+                        function resetApp(){
+
+                            // hide the alert box
+
+                            document.getElementById("alert").classList.add("invisible");
+
+                            // clear the input box
+
+                            document.getElementById("userInput").value = "";
                         }
                     </code>
                     </pre>
                 </div>
                 <!-- Description Side -->
                 <div class="col-lg-4">
-                    <p>The Code is structed in one function.</p>
-                    <h5>Hello World</h5>
-                    <p>Hellow World is a function that displays an alert with a message of "Hello World!"</p>
+                    <h5>getValue()</h5>
+                    <p>
+                        &emsp;The <i>getValue( )</i> function is our starting point for the application. The first thing our function 
+                        does is to make sure our results element is hidden by adding the <i>invisible</i> class to the html 
+                        element if it is not already there. Next, we take in the value from our input on the webpage, and store 
+                        it inside an appropriately named variable. We check to see if the user entered a value or if they simply 
+                        clicked the button expecting to use the placeholder value. I prefer to use this method over a value attribute 
+                        due to the fact that the user has to physically remove the value if they want to enter their own word or phrase. 
+                        If the user left the string blank, then we set the userInput equal to the placeholder, "racecar." Next, we create 
+                        a new variable called <i>reversedInput</i>, and set it equal to the value returned by our <i>reversedInput( )</i> 
+                        function when we pass the <i>userInput</i> variable in as a parameter.
+                    </p>
+                    <p>
+                        &emsp;Once a value is returned from the <i>reversedInput( )</i> function, the <i>userInput</i> and <i>reversedInput</i> 
+                        variables are passed into our <i>palindromeCheck( )</i> function as parameters. This boolean result is assigned to the 
+                        <i>palindromeTestResult</i> variable.
+                    </p>
+                    <p>
+                        &emsp;Once we have this <i>palindromeTestResult</i> variable, we can pass it into our <i>displayResults( )</i> function along 
+                        with <i>userInput</i> and <i>reversedInput</i>.
+                    </p>
+                    <h5>reverseInput()</h5>
+                    <p>
+                        &emsp;The <i>reverseInput( )</i> function receives the <i>userInput</i> variable as a parameter. First, we 
+                        create an empty array variable called <i>reversedInput</i> to store the reversed string we are about to create. 
+                        Next, we use a specially designed for loop to reverse the string. The logic here can be tricky to understand at first. 
+                        We start the loop with an index equal to the length of the userInput array minus 1. The loop will run over the <i>userInput</i> 
+                        array, and set the first element of the <i>reversedInput</i> array equal to the value at the current index location of 
+                        the <i>userInput</i> variable. This is where the reversing takes place. After that loop is completed, the index is 
+                        decrimented (made smaller) by 1, and the loop runs again until the index is less than 0. The completed <i>reversedInput</i> 
+                        array is then returned to the <i>getValue( )</i> function to continue with the rest of the function.
+                    </p>
+                    <p>
+                        &emsp;For example, if we enter the word 'read,' the first loop through will set the first element of the <i>reversedString</i> 
+                        array to 'd'. The next loop sets the second element of the <i>reversedString</i> array to 'a', and so on.
+                    </p>
+                    <h5>palindromeCheck()</h5>
+                    <p>
+                        &emsp;The <i>palindromeCheck( )</i> function receives the <i>userInput</i> and <i>reversedInput</i> parameters, and uses a 
+                        simple if/then statement to compare the original input to the reversed input. If they match, then we set the result to "True." 
+                        Otherwise, we leave it as "False," and return the True/False value.
+                    </p>
+                    <h5>displayString()</h5>
+                    <p>
+                        &emsp;The <i>displayString( )</i> function receives the <i>palindromeTestResult</i>, <i>userInput</i>, and <i>reversedString</i>
+                        parameters, and sets the inner html of our alert header and our results element to display a message containing whether 
+                        or not the input was a palindrome, and to display the original input versus the reversed input. The last step is to remove the <i>invisible</i> class from 
+                        our result element to show the result to the user on-screen.
+                    </p>
+                    <h5>resetApp()</h5>
+                    <p>
+                        &emsp;The function runs when the user clicks the "reset" button, and re-adds the invisible class 
+                        to the results element. It also sets the input box's value back to an empty string, which takes 
+                        the application back to it's initial state.
+                    </p>
                 </div>
             </div>
         </div>

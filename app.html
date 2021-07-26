@@ -2,7 +2,7 @@
 <html lang="en" class="h-100">
 
 <head>
-    <title>App Name: A Coding Project By Shawn Rogoff</title>
+    <title>Racecar: A Coding Project By Shawn Rogoff</title>
     <link rel="shortcut icon" type="image/jpg" href="/img/ShawnRogoffFavicon.ico"/>
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -28,7 +28,7 @@
     <!-- Nav Section -->
     <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
         <div class="container-fluid">
-            <a class="navbar-brand logoFont"><img src="/img/ShawnRogoffMarkLight.png" class="d-inline-block align-text-top" width="30" height="24"> App Name</a>
+            <a class="navbar-brand logoFont"><img src="/img/ShawnRogoffMarkLight.png" class="d-inline-block align-text-top" width="30" height="24"> Racecar</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
                 aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -45,7 +45,7 @@
                         <a class="nav-link" href="code.html">The Code</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" target="_blank" href="#">Git Repo</a>
+                        <a class="nav-link" target="_blank" href="https://github.com/shawnrogoff/Racecar">Git Repo</a>
                         <!-- put github link in the above href -->
                     </li>
                     <li class="nav-item">
@@ -59,18 +59,40 @@
     <!-- Main Section -->
     <main class="flex-shrink-0">
         <div class="container mt-5">
-            <div class="col col-lg-6 border-end border-2">
-                <h1 class="logoFont display-5 1h-1 mb-3">APP NAME: A Coding Project</h1>
-                <h4 class="lead pb-3">
-                    Challenge Text
-                </h4>
-                <h2 class="mt-5 border-bottom border-2">Instructions</h2>
-                <!-- Instructions to use application -->
-                <p>instruction here</p>
-            </div>
-            <div class="col col-lg-6">
-                
-            </div>
+            <div class="row row-cols-1 row-cols-lg-2">
+                <div class="col col-lg-6 border-end border-2">
+                    <h1 class="logoFont display-5 1h-1 mb-3">Racecar: A Coding Project</h1>
+                    <h4 class="lead pb-3">
+                        Racecar is a palindrome. A palindrome is a word, phrase, or sequence that reads 
+                        the same backward as forward. Write a program that checks if the phrase entered is a palindrome.
+                    </h4>
+                    <h2 class="mt-5 border-bottom border-2">Instructions</h2>
+                    <!-- Instructions to use application -->
+                    <p>Enter a word, phrase, or sequence into the input field, and press the "Check For Palindrome" button to see 
+                        your results.
+                    </p>
+                </div>
+                <div class="col col-lg-6">
+                    <h5 class="border-1 border-bottom border-danger">Enter A Word, Phrase, or Sequence To Check</h5>
+                        <form class="row gx-3 gy-2">
+                            <div class="col mt-3 mb-3">
+                                <input id="userInput" type="text" class="form-control" placeholder="racecar" aria-label="Enter A Word">
+                            </div>
+                            <div class="col-12 d-flex align-content-center justify-content-center justify-content-lg-end">
+                                <button id="btnSubmit" type="button" class="btn btn-danger btn-lg">Check For Palindrome</button>
+                            </div>
+                            <div class="alert alert-danger mt-5 invisible fade show" id="alert" role="alert">
+                                <h4 id="alertHeading" class="alert-heading">
+                                    <!-- Insert result announcement with javascript here -->
+                                </h4>
+                                <hr>
+                                <p class="mb-0" id="message">
+                                    <!-- Insert message with javascript here -->
+                                </p>
+                                <button id="btnReset" type="button" class="btn btn-outline-danger btn-lg">Reset</button> 
+                            </div>
+                        </form>
+                </div>
         </div>
     </main>
     <!-- Footer -->
@@ -101,5 +123,9 @@
         integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous">
     </script>
     <script src="/js/site.js"></script>
+    <script>
+        document.getElementById("btnSubmit").addEventListener("click", getValue);
+        document.getElementById("btnReset").addEventListener("click", resetApp);
+    </script>
 </body>
 </html>
