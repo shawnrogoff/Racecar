@@ -12,60 +12,51 @@ function getValue(){
         userInput = "racecar";
     }
 
-    // pass input into reverseString function
-    let reversedInput = reverseInput(userInput);
-
-    // pass reversedInput into our palindrome checker
-    let palindromeTestResult = palindromeCheck(userInput, reversedInput);
+    // pass input into palindromeCheck function
+    let returnObject = palindromeCheck(userInput);
 
     // pass reversed string to displayResults function
-    displayResults(userInput, reversedInput, palindromeTestResult);
-}
-
-// Reverse the string
-// Logic Function
-function reverseInput(userInput){
-    let reversedInput = [];
-
-    // use a for loop to reverse the string
-    for (let index = userInput.length - 1; index >= 0; index--) {
-        reversedInput += userInput[index];
-    }
-
-    // return the reversedString array to getValue function
-    return reversedInput;
+    displayResults(returnObject);
 }
 
 // Check original versus the reversed version
 // Logic Function
-function palindromeCheck(userInput, reversedInput){
-    let palindromeTestResult = "False";
+function palindromeCheck(userInput){
+    
+    // convert to lowercase
+    userInput = userInput.toLowerCase();
 
-    if (userInput == reversedInput){
-        palindromeTestResult = "True";
+    // remove spaces and special characters
+    let regex = /[^a-z0-9]/gi;
+
+    userInput = userInput.replace(regex,"");
+
+    let reversedInput = [];
+    let returnObject = {};
+
+    for (let i = userInput.length -1; i >= 0; i--){
+        reversedInput += userInput[i];
     }
 
-    return palindromeTestResult;
+    if (reversedInput == userInput){
+        returnObject.msg = "Well done! You entered a palindrome!";
+    } else {
+        returnObject.msg = "Sorry! You did not enter a palindrome!";
+    }
+
+    returnObject.reversed = reversedInput;
+
+    return returnObject;
 }
 
 // Display the reversed string to page
 // View Function
-function displayResults(userInput, reversedInput, palindromeTestResult){
+function displayResults(returnObject){
 
     // show palindrome result based on the test results
-    if (palindromeTestResult == "True"){
-        document.getElementById("alertHeading").innerHTML = "Success! This is a palindrome!";
-    } else {
-        document.getElementById("alertHeading").innerHTML = "I'm sorry! This is not a palindrome.";
-    }
-
-    // write the message to the page
-
-    document.getElementById("message").innerHTML = `The original input is: ${userInput}</p><p>The reversed input is: ${reversedInput}`;
-
-    // show the alert box
-
-    document.getElementById("alert").classList.remove("invisible");
+        document.getElementById("alertHeading").innerHTML = returnObject.msg;
+        document.getElementById("message").innerHTML = `Your phrase reversed is: ${returnObject.reversed}`;
+        document.getElementById("alert").classList.remove("invisible");
 }
 
 // allow button to reset the app
